@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Modiv</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhysEd DodgeCoin</title>
   <style>
     html {
       scroll-behavior: smooth;
@@ -26,7 +26,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0.5rem 1rem;
     }
     .logo-bar {
       display: flex;
@@ -43,7 +43,7 @@
     .dropbtn {
       background-color: #000;
       color: white;
-      padding: 14px;
+      padding: 10px;
       font-size: 16px;
       border: none;
       cursor: pointer;
@@ -61,7 +61,6 @@
       padding: 12px 16px;
       text-decoration: none;
       display: block;
-      cursor: pointer;
     }
     .dropdown-content a:hover {
       background-color: #555;
@@ -69,41 +68,59 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    .content {
-      padding: 2rem;
-    }
-    section {
-      margin-bottom: 4rem;
-    }
-    .hidden {
-      display: none;
-    }
-    .item {
-      background: #1f1f1f;
+    .activity-container {
+      max-width: 800px;
+      margin: 2rem auto;
       padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 8px;
+      background-color: #1f1f1f;
+      border-radius: 10px;
     }
-    .item button {
-      margin-top: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #fcd307;
-      color: black;
-      font-weight: bold;
+    .activity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #292929;
+    }
+    .info {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .info img {
+      height: 80px;
+      margin-right: 15px;
+      border-radius: 10px;
+    }
+    .details h3 {
+      margin: 0 0 0.3rem 0;
+    }
+    .timer {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .balance-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      padding: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .balance-bar img {
+      height: 24px;
+      margin-right: 10px;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.5);
       cursor: pointer;
-      border-radius: 4px;
-    }
-    img {
-      max-width: 400px;
-      width: 100%;
-      border-radius: 8px;
-      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>PhysEd DodgeCoin</h1>
     <p>Earn DodgeCoins for getting active!</p>
@@ -111,101 +128,70 @@
 
   <nav>
     <div class="logo-bar">
-      <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="DodgeCoin Icon">
-      <span id="coinBalance">120 DodgeCoins</span>
+      <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="DodgeCoin Icon" />
+      <span>120 DodgeCoins</span>
     </div>
     <div class="dropdown">
       <button class="dropbtn">Menu</button>
       <div class="dropdown-content">
-        <a onclick="showPage('home')">Home</a>
-        <a onclick="showPage('activities')">Activities</a>
-        <a onclick="showPage('motivation')">Random Motivation</a>
-        <a onclick="showPage('shop')">Shop</a>
+        <a href="activities.html">Activities</a>
+        <a href="random.html">Random Motivation</a>
+        <a href="shop.html">Shop</a>
       </div>
     </div>
   </nav>
 
-  <div class="content">
+  <div class="balance-bar">
+    <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="DodgeCoin Icon" />
+    <span id="balance">120</span> DodgeCoins
+  </div>
 
-    <!-- HOME PAGE -->
-    <div id="home" class="page">
-      <section>
-        <h2>Welcome to PhysEd DodgeCoin</h2>
-        <p>Earn fun rewards for staying active! Use DodgeCoins to unlock custom items while getting fit. Scroll down to learn more or use the menu above to jump to specific sections.</p>
-      </section>
-      <section>
-        <h2>What is DodgeCoin?</h2>
-        <p>DodgeCoin is a fictional reward token you earn by completing physical education activities. These tokens can be used in the shop to personalize your profile or website layout.</p>
-      </section>
-      <section>
-        <h2>How It Works</h2>
-        <p>1. Complete activities.<br>
-           2. Earn DodgeCoins.<br>
-           3. Spend them in the shop.<br>
-           4. Stay active and healthy!</p>
-      </section>
-    </div>
-
-    <!-- ACTIVITIES PAGE -->
-    <div id="activities" class="page hidden">
-      <h2>Activities</h2>
-      <ul>
-        <li>10-minute jog = +5 DodgeCoins</li>
-        <li>15-minute yoga session = +7 DodgeCoins</li>
-        <li>20-minute bike ride = +10 DodgeCoins</li>
-        <li>5 sets of pushups (20 reps) = +6 DodgeCoins</li>
-        <li>30-minute sports game = +12 DodgeCoins</li>
-      </ul>
-    </div>
-
-    <!-- MOTIVATION PAGE -->
-    <div id="motivation" class="page hidden">
-      <h2>Stay Motivated</h2>
-      <p>"Your only limit is you. Push harder than yesterday if you want a different tomorrow."</p>
-      <img src="https://i.imgur.com/EYVZtJk.jpg" alt="Motivational Image">
-    </div>
-
-    <!-- SHOP PAGE -->
-    <div id="shop" class="page hidden">
-      <h2>Shop</h2>
-      <div class="item">
-        <h3>Dark Mode Theme</h3>
-        <p>Cost: 30 DodgeCoins</p>
-        <button onclick="spendCoins(30)">Buy</button>
+  <div class="activity-container">
+    <div class="activity">
+      <div class="info">
+        <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=100&q=80" alt="Jump Rope">
+        <div class="details">
+          <h3>Jump Rope</h3>
+          <div class="timer">5 minutes</div>
+        </div>
       </div>
-      <div class="item">
-        <h3>Custom Avatar Icon</h3>
-        <p>Cost: 20 DodgeCoins</p>
-        <button onclick="spendCoins(20)">Buy</button>
-      </div>
-      <div class="item">
-        <h3>Animated Background</h3>
-        <p>Cost: 40 DodgeCoins</p>
-        <button onclick="spendCoins(40)">Buy</button>
-      </div>
+      <input type="checkbox" onclick="addCoins(this, 10)">
     </div>
 
+    <div class="activity">
+      <div class="info">
+        <img src="https://images.unsplash.com/photo-1605296867304-3db97f1e33c6?auto=format&fit=crop&w=100&q=80" alt="Push-ups">
+        <div class="details">
+          <h3>15 Push-ups</h3>
+          <div class="timer">3 minutes</div>
+        </div>
+      </div>
+      <input type="checkbox" onclick="addCoins(this, 5)">
+    </div>
+
+    <div class="activity">
+      <div class="info">
+        <img src="https://images.unsplash.com/photo-1584466992202-8817e8720074?auto=format&fit=crop&w=100&q=80" alt="Quick Jog">
+        <div class="details">
+          <h3>Quick Jog</h3>
+          <div class="timer">10 minutes</div>
+        </div>
+      </div>
+      <input type="checkbox" onclick="addCoins(this, 15)">
+    </div>
   </div>
 
   <script>
-    let balance = 120;
+    let currentBalance = 120;
 
-    function showPage(id) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(p => p.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-    }
-
-    function spendCoins(amount) {
-      if (balance >= amount) {
-        balance -= amount;
-        document.getElementById('coinBalance').innerText = `${balance} DodgeCoins`;
-        alert('Purchase successful!');
+    function addCoins(checkbox, amount) {
+      if (checkbox.checked) {
+        currentBalance += amount;
       } else {
-        alert('Not enough DodgeCoins!');
+        currentBalance -= amount;
       }
+      document.getElementById("balance").innerText = currentBalance;
     }
   </script>
-
 </body>
 </html>
