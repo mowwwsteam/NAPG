@@ -2,219 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PhysEd DodgeCoin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoBrand Showcase</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin:0; padding:0; box-sizing:border-box;}
+    body { font-family: Arial, sans-serif; color: #333; line-height:1.6; }
+    a { text-decoration: none; color: inherit; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #121212;
-      color: #f1f1f1;
-      margin: 0;
-      padding: 0;
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; background:#222; color:white; position:sticky; top:0; z-index:100;
     }
+    .navbar nav a { margin:0 1rem; }
+    .navbar nav a:hover { text-decoration:underline; }
 
-    header {
-      background-color: #1f1f1f;
-      padding: 2rem;
-      text-align: center;
+    .hero {
+      position:relative; height:80vh; overflow:hidden;
     }
+    .hero video {
+      width:100%; height:100%; object-fit:cover;
+    }
+    .hero-overlay {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.4); display:flex;
+      flex-direction:column; justify-content:center; align-items:center;
+      color:white; text-align:center;
+    }
+    .hero-overlay button {
+      margin-top:1rem; padding:0.8rem 1.5rem;
+      font-size:1rem; background:#ff5500; border:none; color:white;
+      cursor:pointer; border-radius:4px;
+    }
+    .hero-overlay button:hover { background:#e64a00; }
 
-    header h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2.5rem;
-    }
+    .section { padding:4rem 2rem; }
+    .section h2 { margin-bottom:2rem; text-align:center; }
 
-    header p {
-      color: #bbbbbb;
+    .models .cards, .testimonial-cards {
+      display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
     }
+    .card, .testimonial {
+      background:#f8f8f8; padding:1.5rem; border-radius:8px;
+      max-width:300px; text-align:center;
+    }
+    .card img { width:100%; border-radius:8px; margin-bottom:1rem; }
 
-    nav {
-      background: #000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1.5rem;
+    .gallery-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+      gap:1rem;
     }
+    .gallery-grid img { width:100%; border-radius:8px; }
 
-    .logo-bar {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
+    .media-videos {
+      display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
     }
+    .media-videos iframe { max-width:100%; }
 
-    .logo-bar img {
-      height: 24px;
-      margin-right: 0.5rem;
-    }
+    .testimonials { background:#eaeaea; }
 
-    .dropdown {
-      position: relative;
+    footer {
+      background:#222; color:#ccc; text-align:center; padding:2rem;
     }
-
-    .dropbtn {
-      background-color: #000;
-      color: white;
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: #222;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      color: white;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #555;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .balance-bar {
-      text-align: center;
-      background: #181818;
-      padding: 1rem;
-      font-size: 1.25rem;
-    }
-
-    .activity-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-
-    .activity {
-      flex: 1 1 300px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s;
-    }
-
-    .activity:hover {
-      transform: translateY(-5px);
-    }
-
-    .activity img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .activity-content {
-      padding: 1rem;
-    }
-
-    .activity-content h3 {
-      margin-top: 0;
-      font-size: 1.4rem;
-    }
-
-    .activity-content p {
-      margin: 0.5rem 0;
-      color: #aaaaaa;
-    }
-
-    .activity input[type="checkbox"] {
-      transform: scale(1.4);
-      margin-top: 1rem;
-    }
+    footer h3 { color:white; margin-bottom:1rem; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>PhysEd DodgeCoin</h1>
-    <p>Complete physical challenges and earn digital rewards while staying fit!</p>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">AutoBrand</div>
+    <nav>
+      <a href="#models">Models</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <nav>
-    <div class="logo-bar">
-      <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="DodgeCoin Icon">
-      <span id="balanceDisplay">120 DodgeCoins</span>
+  <!-- Hero Video Section -->
+  <section class="hero">
+    <video autoplay muted loop id="heroVideo">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="hero-overlay">
+      <h1>Discover the Experience</h1>
+      <button>Explore Models</button>
     </div>
-    <div class="dropdown">
-      <button class="dropbtn">Menu</button>
-      <div class="dropdown-content">
-        <a href="#">Activities</a>
-        <a href="#">Motivation</a>
-        <a href="#">Shop</a>
+  </section>
+
+  <!-- Models Section -->
+  <section id="models" class="section models">
+    <h2>Our Models</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://picsum.photos/seed/model1/400/250" alt="Model 1">
+        <h3>Model One</h3>
+        <p>Description for Model One.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/model2/400/250" alt="Model 2">
+        <h3>Model Two</h3>
+        <p>Description for Model Two.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/model3/400/250" alt="Model 3">
+        <h3>Model Three</h3>
+        <p>Description for Model Three.</p>
       </div>
     </div>
-  </nav>
+  </section>
 
-  <div class="balance-bar">
-    Current Balance: <strong id="balance">120</strong> DodgeCoins
-  </div>
+  <!-- Gallery Section -->
+  <section id="gallery" class="section gallery">
+    <h2>Photo Gallery</h2>
+    <div class="gallery-grid">
+      <img src="https://picsum.photos/seed/gal1/300/200" alt="Gallery 1">
+      <img src="https://picsum.photos/seed/gal2/300/200" alt="Gallery 2">
+      <img src="https://picsum.photos/seed/gal3/300/200" alt="Gallery 3">
+      <img src="https://picsum.photos/seed/gal4/300/200" alt="Gallery 4">
+      <img src="https://picsum.photos/seed/gal5/300/200" alt="Gallery 5">
+      <img src="https://picsum.photos/seed/gal6/300/200" alt="Gallery 6">
+    </div>
+  </section>
 
-  <div class="activity-container">
-    <div class="activity">
-      <img src="https://source.unsplash.com/400x200/?fitness,jump" alt="Jump Rope">
-      <div class="activity-content">
-        <h3>Jump Rope</h3>
-        <p>Duration: 5 minutes</p>
-        <input type="checkbox" onchange="updateBalance(this, 10)">
+  <!-- Video Highlights Section -->
+  <section id="media" class="section media">
+    <h2>Media Highlights</h2>
+    <div class="media-videos">
+      <div class="media-video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media;" allowfullscreen></iframe>
+      </div>
+      <div class="media-video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/oHg5SJYRHA0" 
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media;" allowfullscreen></iframe>
       </div>
     </div>
+  </section>
 
-    <div class="activity">
-      <img src="https://source.unsplash.com/400x200/?exercise,pushup" alt="Push Ups">
-      <div class="activity-content">
-        <h3>15 Push-ups</h3>
-        <p>Duration: 3 minutes</p>
-        <input type="checkbox" onchange="updateBalance(this, 5)">
+  <!-- Testimonials Section -->
+  <section class="section testimonials">
+    <h2>What People Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial">
+        <p>"Absolutely love it! A game-changer."</p>
+        <span>- Alex</span>
+      </div>
+      <div class="testimonial">
+        <p>"Incredible design and performance."</p>
+        <span>- Jamie</span>
+      </div>
+      <div class="testimonial">
+        <p>"Never seen anything like it."</p>
+        <span>- Taylor</span>
       </div>
     </div>
+  </section>
 
-    <div class="activity">
-      <img src="https://source.unsplash.com/400x200/?run,track" alt="Jog">
-      <div class="activity-content">
-        <h3>Jog in Place</h3>
-        <p>Duration: 10 minutes</p>
-        <input type="checkbox" onchange="updateBalance(this, 15)">
-      </div>
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <h3>AutoBrand</h3>
+      <p>Contact us: info@autobrand.com</p>
+      <p>&copy; 2025 AutoBrand. All Rights Reserved.</p>
     </div>
-  </div>
+  </footer>
 
   <script>
-    let balance = localStorage.getItem('dodgeBalance') ? parseInt(localStorage.getItem('dodgeBalance')) : 120;
-    document.getElementById("balance").innerText = balance;
-    document.getElementById("balanceDisplay").innerText = balance + " DodgeCoins";
-
-    function updateBalance(checkbox, amount) {
-      if (checkbox.checked) {
-        balance += amount;
-      } else {
-        balance -= amount;
-      }
-      localStorage.setItem('dodgeBalance', balance);
-      document.getElementById("balance").innerText = balance;
-      document.getElementById("balanceDisplay").innerText = balance + " DodgeCoins";
-    }
+    // Scroll-to-section when navbar links clicked
+    document.querySelectorAll('.navbar nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 </body>
 </html>
