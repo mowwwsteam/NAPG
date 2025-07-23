@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhysEd DodgeCoin</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modiv</title>
   <style>
     html {
       scroll-behavior: smooth;
@@ -23,7 +23,6 @@
     }
     nav {
       background: #000;
-      overflow: hidden;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -54,7 +53,7 @@
       position: absolute;
       background-color: #222;
       min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
       z-index: 1;
     }
     .dropdown-content a {
@@ -62,6 +61,7 @@
       padding: 12px 16px;
       text-decoration: none;
       display: block;
+      cursor: pointer;
     }
     .dropdown-content a:hover {
       background-color: #555;
@@ -75,9 +75,35 @@
     section {
       margin-bottom: 4rem;
     }
+    .hidden {
+      display: none;
+    }
+    .item {
+      background: #1f1f1f;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    .item button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #fcd307;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
+
   <header>
     <h1>PhysEd DodgeCoin</h1>
     <p>Earn DodgeCoins for getting active!</p>
@@ -86,34 +112,100 @@
   <nav>
     <div class="logo-bar">
       <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="DodgeCoin Icon">
-      <span>120 DodgeCoins</span>
+      <span id="coinBalance">120 DodgeCoins</span>
     </div>
     <div class="dropdown">
       <button class="dropbtn">Menu</button>
       <div class="dropdown-content">
-        <a href="activities.html">Activities</a>
-        <a href="random.html">Random Motivation</a>
-        <a href="shop.html">Shop</a>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('activities')">Activities</a>
+        <a onclick="showPage('motivation')">Random Motivation</a>
+        <a onclick="showPage('shop')">Shop</a>
       </div>
     </div>
   </nav>
 
   <div class="content">
-    <section>
-      <h2>Welcome to PhysEd DodgeCoin</h2>
-      <p>Earn fun rewards for staying active! Use DodgeCoins to unlock custom items while getting fit. Scroll down to learn more or use the menu above to jump to specific pages.</p>
-    </section>
-    <section>
-      <h2>What is DodgeCoin?</h2>
-      <p>DodgeCoin is a fictional reward token you earn by completing physical education activities. These tokens can be used in the shop to personalize your profile or website layout.</p>
-    </section>
-    <section>
-      <h2>How It Works</h2>
-      <p>1. Complete activities.<br>
-         2. Earn DodgeCoins.<br>
-         3. Spend them in the shop.<br>
-         4. Stay active and healthy!</p>
-    </section>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page">
+      <section>
+        <h2>Welcome to PhysEd DodgeCoin</h2>
+        <p>Earn fun rewards for staying active! Use DodgeCoins to unlock custom items while getting fit. Scroll down to learn more or use the menu above to jump to specific sections.</p>
+      </section>
+      <section>
+        <h2>What is DodgeCoin?</h2>
+        <p>DodgeCoin is a fictional reward token you earn by completing physical education activities. These tokens can be used in the shop to personalize your profile or website layout.</p>
+      </section>
+      <section>
+        <h2>How It Works</h2>
+        <p>1. Complete activities.<br>
+           2. Earn DodgeCoins.<br>
+           3. Spend them in the shop.<br>
+           4. Stay active and healthy!</p>
+      </section>
+    </div>
+
+    <!-- ACTIVITIES PAGE -->
+    <div id="activities" class="page hidden">
+      <h2>Activities</h2>
+      <ul>
+        <li>10-minute jog = +5 DodgeCoins</li>
+        <li>15-minute yoga session = +7 DodgeCoins</li>
+        <li>20-minute bike ride = +10 DodgeCoins</li>
+        <li>5 sets of pushups (20 reps) = +6 DodgeCoins</li>
+        <li>30-minute sports game = +12 DodgeCoins</li>
+      </ul>
+    </div>
+
+    <!-- MOTIVATION PAGE -->
+    <div id="motivation" class="page hidden">
+      <h2>Stay Motivated</h2>
+      <p>"Your only limit is you. Push harder than yesterday if you want a different tomorrow."</p>
+      <img src="https://i.imgur.com/EYVZtJk.jpg" alt="Motivational Image">
+    </div>
+
+    <!-- SHOP PAGE -->
+    <div id="shop" class="page hidden">
+      <h2>Shop</h2>
+      <div class="item">
+        <h3>Dark Mode Theme</h3>
+        <p>Cost: 30 DodgeCoins</p>
+        <button onclick="spendCoins(30)">Buy</button>
+      </div>
+      <div class="item">
+        <h3>Custom Avatar Icon</h3>
+        <p>Cost: 20 DodgeCoins</p>
+        <button onclick="spendCoins(20)">Buy</button>
+      </div>
+      <div class="item">
+        <h3>Animated Background</h3>
+        <p>Cost: 40 DodgeCoins</p>
+        <button onclick="spendCoins(40)">Buy</button>
+      </div>
+    </div>
+
   </div>
+
+  <script>
+    let balance = 120;
+
+    function showPage(id) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function spendCoins(amount) {
+      if (balance >= amount) {
+        balance -= amount;
+        document.getElementById('coinBalance').innerText = `${balance} DodgeCoins`;
+        alert('Purchase successful!');
+      } else {
+        alert('Not enough DodgeCoins!');
+      }
+    }
+  </script>
+
 </body>
 </html>
