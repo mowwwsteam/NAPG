@@ -2,183 +2,585 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoBrand Showcase</title>
+  <title>MODIV - Move & Be Well</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * { margin:0; padding:0; box-sizing:border-box;}
-    body { font-family: Arial, sans-serif; color: #333; line-height:1.6; }
-    a { text-decoration: none; color: inherit; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      transition: background-image 0.5s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header#banner {
+      position: relative;
+      background: linear-gradient(135deg, #330000, #660000);
+      height: 180px;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #ff4422;
+      text-shadow: 0 0 10px #ff3c3caa;
+      user-select: none;
+      margin-bottom: 15px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 6px 15px #ff442233;
+    }
+    nav {
+      background-color: #111;
+      text-align: center;
+      padding: 15px 0;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ff442233;
+    }
+    nav a {
+      color: #f00;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    nav a:hover, nav a.active {
+      color: #ff6b6b;
+      text-shadow: 0 0 6px #ff6b6baa;
+    }
+    #profileIcon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #ff4422;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: #fff;
+      user-select: none;
+      box-shadow: 0 0 10px #ff4422bb;
+      cursor: default;
+    }
+    .coins {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 25px 0;
+      color: #f00;
+      max-width: 1200px;
+      width: 100%;
+    }
 
-    .navbar {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1rem 2rem; background:#222; color:white; position:sticky; top:0; z-index:100;
+    /* Section styling */
+    section {
+      max-width: 1200px;
+      width: 100%;
+      padding: 20px 25px 40px 25px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 400px;
     }
-    .navbar nav a { margin:0 1rem; }
-    .navbar nav a:hover { text-decoration:underline; }
+    section.active {
+      display: flex;
+    }
 
-    .hero {
-      position:relative; height:80vh; overflow:hidden;
+    /* Goals & badges */
+    #goalsList li {
+      line-height: 1.5;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
-    .hero video {
-      width:100%; height:100%; object-fit:cover;
+    #goalsList li:hover {
+      color: #ff6b6b;
+      cursor: default;
     }
-    .hero-overlay {
-      position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.4); display:flex;
-      flex-direction:column; justify-content:center; align-items:center;
-      color:white; text-align:center;
+    #badges {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .hero-overlay button {
-      margin-top:1rem; padding:0.8rem 1.5rem;
-      font-size:1rem; background:#ff5500; border:none; color:white;
-      cursor:pointer; border-radius:4px;
+    .badge {
+      background: #ff4422;
+      padding: 6px 14px;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 0 8px #ff4422bb;
+      user-select: none;
     }
-    .hero-overlay button:hover { background:#e64a00; }
 
-    .section { padding:4rem 2rem; }
-    .section h2 { margin-bottom:2rem; text-align:center; }
-
-    .models .cards, .testimonial-cards {
-      display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
+    /* Activity list styles */
+    #activityList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
     }
-    .card, .testimonial {
-      background:#f8f8f8; padding:1.5rem; border-radius:8px;
-      max-width:300px; text-align:center;
+    .activity {
+      flex: 1 1 280px;
+      max-width: 280px;
+      background: #222;
+      border-left: 6px solid #ff5722;
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px #ff5722bb;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-sizing: border-box;
+      user-select: none;
     }
-    .card img { width:100%; border-radius:8px; margin-bottom:1rem; }
-
-    .gallery-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-      gap:1rem;
+    .activity h3 {
+      font-size: 1.3rem;
+      color: #ff6b6b;
+      text-shadow: 0 0 4px #ff6b6baa;
     }
-    .gallery-grid img { width:100%; border-radius:8px; }
-
-    .media-videos {
-      display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
+    .activity p {
+      font-size: 0.95rem;
+      color: #eee;
+      min-height: 44px;
     }
-    .media-videos iframe { max-width:100%; }
-
-    .testimonials { background:#eaeaea; }
-
-    footer {
-      background:#222; color:#ccc; text-align:center; padding:2rem;
+    .activity button {
+      background: linear-gradient(90deg, #ff4e50, #f9d423);
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+      box-shadow: 0 3px 6px #bb3a3a;
+      user-select: none;
     }
-    footer h3 { color:white; margin-bottom:1rem; }
+    .activity button:hover:not(:disabled) {
+      transform: scale(1.07);
+      box-shadow: 0 5px 8px #ff6b6b;
+    }
+    .activity button:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    .timer {
+      margin-top: 8px;
+      font-weight: 700;
+      color: #ff9800;
+      user-select: text;
+    }
+    .complete {
+      color: #32cd32;
+      margin-top: 8px;
+      font-weight: 700;
+      user-select: text;
+    }
+
+    /* Leaderboard */
+    #leaderboard .leaderboard {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .leaderboard-item {
+      background: #222;
+      padding: 12px 18px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 0 8px #ff442299;
+      user-select: none;
+    }
+    .leaderboard-item .rank {
+      width: 24px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #ff4422;
+    }
+    .profile-icon-small {
+      width: 36px;
+      height: 36px;
+      background-color: #ff4422;
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 6px #ff4422bb;
+      user-select: none;
+    }
+    .leaderboard-item .username {
+      flex-grow: 1;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+    }
+    .leaderboard-item .coins {
+      font-weight: 700;
+      color: #ff6b6b;
+      min-width: 50px;
+      text-align: right;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">AutoBrand</div>
-    <nav>
-      <a href="#models">Models</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#media">Media</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header id="banner">
+    MODIV - Move & Be Well
+    <div id="profileIcon" title="Your profile"></div>
   </header>
 
-  <!-- Hero Video Section -->
-  <section class="hero">
-    <video autoplay muted loop id="heroVideo">
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-    <div class="hero-overlay">
-      <h1>Discover the Experience</h1>
-      <button>Explore Models</button>
-    </div>
+  <nav>
+    <a href="#" data-section="home" class="active">Home</a>
+    <a href="#" data-section="activities">Activities</a>
+    <a href="#" data-section="goals">Goals</a>
+    <a href="#" data-section="leaderboard">Leaderboard</a>
+  </nav>
+
+  <div class="coins">🪙 Your Coins: <span id="coinCount">0</span></div>
+
+  <section id="home" class="active">
+    <h2>Welcome to MODIV!</h2>
+    <p>Welcome to Modiv, Modiv is a campaign that tries to get teens more active, these days many teens just sit at home, looking at the TV. Modiv tries to enforce the NPAG to get teens more active, trying to achieve 60 minutes of vigorous activity each day. Modivs Activity sections make it fun to do activities and earn coins, do fun competitions with your friends and more. - Made by Harrington Whaley
+</p>
+    <p>Use the navigation above to check your activities, goals, and see how you rank on the leaderboard.</p>
   </section>
 
-  <!-- Models Section -->
-  <section id="models" class="section models">
-    <h2>Our Models</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://picsum.photos/seed/model1/400/250" alt="Model 1">
-        <h3>Model One</h3>
-        <p>Description for Model One.</p>
-      </div>
-      <div class="card">
-        <img src="https://picsum.photos/seed/model2/400/250" alt="Model 2">
-        <h3>Model Two</h3>
-        <p>Description for Model Two.</p>
-      </div>
-      <div class="card">
-        <img src="https://picsum.photos/seed/model3/400/250" alt="Model 3">
-        <h3>Model Three</h3>
-        <p>Description for Model Three.</p>
-      </div>
-    </div>
+  <section id="activities">
+    <h2>Today's Activities</h2>
+    <div id="activityList"></div>
   </section>
 
-  <!-- Gallery Section -->
-  <section id="gallery" class="section gallery">
-    <h2>Photo Gallery</h2>
-    <div class="gallery-grid">
-      <img src="https://picsum.photos/seed/gal1/300/200" alt="Gallery 1">
-      <img src="https://picsum.photos/seed/gal2/300/200" alt="Gallery 2">
-      <img src="https://picsum.photos/seed/gal3/300/200" alt="Gallery 3">
-      <img src="https://picsum.photos/seed/gal4/300/200" alt="Gallery 4">
-      <img src="https://picsum.photos/seed/gal5/300/200" alt="Gallery 5">
-      <img src="https://picsum.photos/seed/gal6/300/200" alt="Gallery 6">
-    </div>
+  <section id="goals">
+    <h2>Your Goals & Badges</h2>
+    <ul id="goalsList"></ul>
+    <div id="badges"></div>
   </section>
 
-  <!-- Video Highlights Section -->
-  <section id="media" class="section media">
-    <h2>Media Highlights</h2>
-    <div class="media-videos">
-      <div class="media-video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media;" allowfullscreen></iframe>
-      </div>
-      <div class="media-video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/oHg5SJYRHA0" 
-          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media;" allowfullscreen></iframe>
-      </div>
-    </div>
+  <section id="leaderboard">
+    <h2>Top Players</h2>
+    <div class="leaderboard"></div>
   </section>
-
-  <!-- Testimonials Section -->
-  <section class="section testimonials">
-    <h2>What People Say</h2>
-    <div class="testimonial-cards">
-      <div class="testimonial">
-        <p>"Absolutely love it! A game-changer."</p>
-        <span>- Alex</span>
-      </div>
-      <div class="testimonial">
-        <p>"Incredible design and performance."</p>
-        <span>- Jamie</span>
-      </div>
-      <div class="testimonial">
-        <p>"Never seen anything like it."</p>
-        <span>- Taylor</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="footer-content">
-      <h3>AutoBrand</h3>
-      <p>Contact us: info@autobrand.com</p>
-      <p>&copy; 2025 AutoBrand. All Rights Reserved.</p>
-    </div>
-  </footer>
 
   <script>
-    // Scroll-to-section when navbar links clicked
-    document.querySelectorAll('.navbar nav a').forEach(link => {
+    // User & Storage
+    let currentUser = '';
+    let coinCount = 0;
+    const leaderboardKey = 'modivLeaderboard';
+    const activityKeyPrefix = 'modivActCount_';
+
+    // Activities data (45 activities, simple descriptions)
+    const allActivities = [
+      { id: 'runInPlace', name: 'Run on the spot', duration: 30, reward: 20, description: 'Run on the spot for 30 seconds.' },
+      { id: 'pushups', name: 'Push-ups', duration: 30, reward: 18, description: 'Do push-ups for 30 seconds.' },
+      { id: 'jumpingJacks', name: 'Jumping jacks', duration: 30, reward: 15, description: 'Do jumping jacks for 30 seconds.' },
+      { id: 'highKnees', name: 'High knees', duration: 30, reward: 18, description: 'Lift your knees high for 30 seconds.' },
+      { id: 'walkDog', name: 'Walk your dog', duration: 600, reward: 50, description: 'Walk your dog for 10 minutes.' },
+      { id: 'strides', name: 'Strides', duration: 120, reward: 25, description: 'Take long steps for 2 minutes.' },
+      { id: 'buttKicks', name: 'Butt kicks', duration: 30, reward: 15, description: 'Kick your heels back for 30 seconds.' },
+      { id: 'stepTouch', name: 'Step touch', duration: 45, reward: 18, description: 'Step touch side to side for 45 seconds.' },
+      { id: 'heelClicks', name: 'Heel clicks', duration: 30, reward: 15, description: 'Click your heels behind you for 30 seconds.' },
+      { id: 'ankleRotations', name: 'Ankle rotations', duration: 60, reward: 18, description: 'Rotate your ankles for 1 minute.' },
+      { id: 'jumpInPlace', name: 'Jump in place', duration: 40, reward: 20, description: 'Jump in place for 40 seconds.' },
+      { id: 'frontKicks', name: 'Front kicks', duration: 45, reward: 22, description: 'Kick forward alternately for 45 seconds.' },
+      { id: 'sideLunges', name: 'Side lunges', duration: 60, reward: 25, description: 'Do side lunges for 1 minute.' },
+      { id: 'walking', name: 'Walk outside', duration: 900, reward: 60, description: 'Walk outside for 15 minutes.' },
+      { id: 'stairs', name: 'Climb stairs', duration: 300, reward: 45, description: 'Walk up and down stairs for 5 minutes.' },
+      { id: 'jumpRopeSim', name: 'Jump rope (simulate)', duration: 45, reward: 25, description: 'Jump as if you are skipping rope for 45 seconds.' },
+      { id: 'fastWalk', name: 'Walk fast', duration: 300, reward: 40, description: 'Walk fast for 5 minutes.' },
+      { id: 'stepUps', name: 'Step ups', duration: 45, reward: 22, description: 'Step up and down on a step for 45 seconds.' },
+      { id: 'marchInPlace', name: 'March in place', duration: 60, reward: 20, description: 'March in place for 1 minute.' },
+      { id: 'birdDog', name: 'Bird dog', duration: 40, reward: 18, description: 'Alternate extending opposite arm and leg for 40 seconds.' },
+      { id: 'legSwings', name: 'Leg swings', duration: 45, reward: 19, description: 'Swing each leg forward and backward for 45 seconds.' },
+      { id: 'standingTwist', name: 'Standing twists', duration: 40, reward: 18, description: 'Twist your torso side to side while standing for 40 seconds.' }, { id: 'armSwings', name: 'Arm swings', duration: 40, reward: 18, description: 'Swing your arms forward and back for 40 seconds.' },
+      { id: 'toeTaps', name: 'Toe taps', duration: 50, reward: 20, description: 'Tap your toes quickly for 50 seconds.' },
+      { id: 'ankleCircles', name: 'Ankle circles', duration: 40, reward: 18, description: 'Rotate each ankle in circles for 40 seconds.' },
+      { id: 'deskPushups', name: 'Desk push-ups', duration: 30, reward: 15, description: 'Do push-ups against a desk or wall for 30 seconds.' },
+      { id: 'jumpingLunges', name: 'Jumping lunges', duration: 40, reward: 25, description: 'Do jumping lunges for 40 seconds.' },
+      { id: 'armCircles', name: 'Arm circles', duration: 45, reward: 18, description: 'Make circles with your arms for 45 seconds.' },
+      { id: 'gentleJog', name: 'Gentle jog', duration: 120, reward: 28, description: 'Jog gently in place for 2 minutes.' },
+      { id: 'sitToStand', name: 'Sit to stand', duration: 60, reward: 22, description: 'Stand up and sit down from a chair for 1 minute.' },
+      { id: 'wallPushups', name: 'Wall push-ups', duration: 45, reward: 18, description: 'Do push-ups against a wall for 45 seconds.' },
+      { id: 'lunges', name: 'Lunges', duration: 60, reward: 25, description: 'Do lunges for 1 minute.' },
+      { id: 'neckRotations', name: 'Neck rotations', duration: 40, reward: 15, description: 'Rotate your neck slowly for 40 seconds.' },
+      { id: 'sideLegRaises', name: 'Side leg raises', duration: 50, reward: 20, description: 'Raise your leg to the side for 50 seconds.' },
+      { id: 'fingerTaps', name: 'Finger taps', duration: 45, reward: 15, description: 'Tap your fingers quickly for 45 seconds.' },
+      { id: 'shoulderShrugs', name: 'Shoulder shrugs', duration: 30, reward: 12, description: 'Shrug your shoulders for 30 seconds.' },
+      { id: 'gentleStretch', name: 'Gentle stretch', duration: 60, reward: 20, description: 'Stretch gently for 1 minute.' }
+    ];
+
+    // Goals and badges definitions
+    const goals = [
+      { id: 'first5', label: 'Earn 5 coins', coinsNeeded: 5, badgeName: 'Getting Started' },
+      { id: 'first50', label: 'Earn 50 coins', coinsNeeded: 50, badgeName: 'On the Move' },
+      { id: 'first150', label: 'Earn 150 coins', coinsNeeded: 150, badgeName: 'Active Achiever' },
+      { id: 'first300', label: 'Earn 300 coins', coinsNeeded: 300, badgeName: 'Fitness Fan' },
+      { id: 'first500', label: 'Earn 500 coins', coinsNeeded: 500, badgeName: 'Health Hero' }
+    ];
+
+    // Utility: Save leaderboard
+    function saveLeaderboard(leaderboard) {
+      localStorage.setItem(leaderboardKey, JSON.stringify(leaderboard));
+    }
+    // Utility: Load leaderboard
+    function loadLeaderboard() {
+      const data = localStorage.getItem(leaderboardKey);
+      return data ? JSON.parse(data) : [];
+    }
+
+    // Save user's coin count & activity completions
+    function saveUserData() {
+      localStorage.setItem('modivUser_' + currentUser, JSON.stringify({
+        coins: coinCount,
+        completedActivities: completedActivities
+      }));
+      // Update leaderboard
+      let leaderboard = loadLeaderboard();
+      const userIndex = leaderboard.findIndex(u => u.username === currentUser);
+      if(userIndex >= 0) {
+        leaderboard[userIndex].coins = coinCount;
+      } else {
+        leaderboard.push({ username: currentUser, coins: coinCount });
+      }
+      // Sort desc coins
+      leaderboard.sort((a,b) => b.coins - a.coins);
+      saveLeaderboard(leaderboard);
+    }
+    // Load user data
+    let completedActivities = {};
+    function loadUserData() {
+      const data = localStorage.getItem('modivUser_' + currentUser);
+      if(data) {
+        const parsed = JSON.parse(data);
+        coinCount = parsed.coins || 0;
+        completedActivities = parsed.completedActivities || {};
+      } else {
+        coinCount = 0;
+        completedActivities = {};
+      }
+      updateCoinsDisplay();
+    }
+
+    // Prompt for username on load
+    function askUsername() {
+      let name = '';
+      while(!name) {
+        name = prompt('Enter your username (letters/numbers only):');
+        if(!name) continue;
+        name = name.trim().toLowerCase();
+        if(!/^[a-z0-9]+$/.test(name)) {
+          alert('Only letters and numbers allowed.');
+          name = '';
+          continue;
+        }
+      }
+      currentUser = name;
+      document.getElementById('profileIcon').textContent = currentUser.charAt(0).toUpperCase();
+      loadUserData();
+    }
+
+    // Show/hide sections
+    function showSection(name) {
+      document.querySelectorAll('section').forEach(s => {
+        s.classList.toggle('active', s.id === name);
+      });
+      document.querySelectorAll('nav a').forEach(a => {
+        a.classList.toggle('active', a.dataset.section === name);
+      });
+    }
+
+    // Update coins display
+    function updateCoinsDisplay() {
+      document.getElementById('coinCount').textContent = coinCount;
+    }
+
+    // Get today's key for daily activities
+    function getTodayKey() {
+      const d = new Date();
+      d.setHours(0,0,0,0);
+      return 'modivDaily_' + d.getTime();
+    }
+
+    // Get daily activities from localStorage or pick new
+    function getDailyActivities() {
+      const key = getTodayKey();
+      let saved = localStorage.getItem(key);
+      if(saved) return JSON.parse(saved);
+
+      const shuffled = [...allActivities].sort(() => Math.random() - 0.5);
+      const selected = shuffled.slice(0, 45);
+      localStorage.setItem(key, JSON.stringify(selected));
+      return selected;
+    }
+
+    // Badge display based on goals
+    function updateBadges() {
+      const badgesDiv = document.getElementById('badges');
+      badgesDiv.innerHTML = '';
+      goals.forEach(g => {
+        if(coinCount >= g.coinsNeeded) {
+          const badge = document.createElement('div');
+          badge.className = 'badge';
+          badge.textContent = g.badgeName;
+          badgesDiv.appendChild(badge);
+        }
+      });
+    }
+
+    // Update goals list
+    function updateGoals() {
+      const goalsList = document.getElementById('goalsList');
+      goalsList.innerHTML = '';
+      goals.forEach(g => {
+        const li = document.createElement('li');
+        if(coinCount >= g.coinsNeeded) {
+          li.textContent = `✔ ${g.label}`;
+          li.style.color = '#32cd32';
+        } else {
+          li.textContent = `❌ ${g.label}`;
+        }
+        goalsList.appendChild(li);
+      });
+      updateBadges();
+    }
+
+    // Update leaderboard display (top 8)
+    function updateLeaderboard() {
+      const lbDiv = document.querySelector('#leaderboard .leaderboard');
+      lbDiv.innerHTML = '';
+      const leaderboard = loadLeaderboard().slice(0, 8);
+      leaderboard.forEach((user, i) => {
+        const div = document.createElement('div');
+        div.className = 'leaderboard-item';
+        div.innerHTML = `
+          <div class="rank">${i + 1}</div>
+          <div class="profile-icon-small" title="${user.username}">${user.username.charAt(0).toUpperCase()}</div>
+          <div class="username">${user.username}</div>
+          <div class="coins">🪙 ${user.coins}</div>
+        `;
+        lbDiv.appendChild(div);
+      });
+    }
+
+    // Activities UI + timer + completion
+    const activityListDiv = document.getElementById('activityList');
+    let dailyActivities = [];
+    let timers = {};
+
+    function renderActivities() {
+      activityListDiv.innerHTML = '';
+      dailyActivities.forEach(act => {
+        const card = document.createElement('div');
+        card.className = 'activity';
+        const done = completedActivities[act.id] || false;
+        card.innerHTML = `
+          <h3>${act.name}</h3>
+          <p>${act.description}</p>
+          <button ${done ? 'disabled' : ''}>Start (${act.duration}s)</button>
+          <div class="timer"></div>
+          <div class="complete">${done ? 'Completed!' : ''}</div>
+        `;
+        const btn = card.querySelector('button');
+        const timerDiv = card.querySelector('.timer');
+        const completeDiv = card.querySelector('.complete');
+
+        btn.onclick = () => {
+          btn.disabled = true;
+          let timeLeft = act.duration;
+          timerDiv.textContent = `Time left: ${timeLeft}s`;
+          timers[act.id] = setInterval(() => {
+            timeLeft--;
+            if(timeLeft > 0) {
+              timerDiv.textContent = `Time left: ${timeLeft}s`;
+            } else {
+              clearInterval(timers[act.id]);
+              timerDiv.textContent = '';
+              completeDiv.textContent = 'Completed!';
+              completedActivities[act.id] = true;
+              coinCount += act.reward;
+              updateCoinsDisplay();
+              updateGoals();
+              saveUserData();
+              updateLeaderboard();
+            }
+          }, 1000);
+        };
+        activityListDiv.appendChild(card);
+      });
+    }
+
+    // Daily timer to next midnight (update every second)
+    const coinsDiv = document.querySelector('.coins');
+    function updateDailyTimer() {
+      const now = new Date();
+      const nextMidnight = new Date();
+      nextMidnight.setHours(24, 0, 0, 0);
+      const diff = Math.floor((nextMidnight - now) / 1000);
+      const h = Math.floor(diff / 3600);
+      const m = Math.floor((diff % 3600) / 60);
+      const s = diff % 60;
+      coinsDiv.textContent = `🪙 Your Coins: ${coinCount} | New activities in ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      if(diff <= 0) {
+        // New day, reload activities
+        dailyActivities = getDailyActivities();
+        completedActivities = {};
+        saveUserData();
+        renderActivities();
+        updateGoals();
+        updateLeaderboard();
+      }
+    }
+    setInterval(updateDailyTimer, 1000);
+
+    // Navigation handler
+    document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelector(link.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        const target = e.target.dataset.section;
+        showSection(target);
+        if(target === 'activities') {
+          renderActivities();
+        }
+        if(target === 'goals') {
+          updateGoals();
+        }
+        if(target === 'leaderboard') {
+          updateLeaderboard();
+        }
       });
     });
+
+    // On load
+    window.onload = () => {
+      askUsername();
+      dailyActivities = getDailyActivities();
+      renderActivities();
+      updateGoals();
+      updateLeaderboard();
+      updateDailyTimer();
+    };
   </script>
 </body>
 </html>
+
